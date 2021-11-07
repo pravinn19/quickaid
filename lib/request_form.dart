@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Requestform extends StatefulWidget {
@@ -6,6 +7,36 @@ class Requestform extends StatefulWidget {
 }
 
 class _RequestformState extends State<Requestform> {
+  final _controllerName = TextEditingController();
+  final _controllerNumber = TextEditingController();
+  final _controllerCategory = TextEditingController();
+  final _controllerItem = TextEditingController();
+  final _controllerDuration = TextEditingController();
+
+  void _saveTask() {
+    final taskName = _controllerName.text;
+    final taskNumber = _controllerNumber.text;
+    final taskCategory = _controllerCategory.text;
+    final taskItem = _controllerItem.text;
+    final taskDuration = _controllerDuration.text;
+
+    FirebaseFirestore.instance.collection("Datum").add({"Name": taskName});
+    FirebaseFirestore.instance.collection("Datum").add({"PNumber": taskNumber});
+    FirebaseFirestore.instance
+        .collection("Datum")
+        .add({"Category": taskCategory});
+    FirebaseFirestore.instance.collection("Datum").add({"Item": taskItem});
+    FirebaseFirestore.instance
+        .collection("Datum")
+        .add({"Duration": taskDuration});
+
+    _controllerName.clear();
+    _controllerNumber.clear();
+    _controllerCategory.clear();
+    _controllerItem.clear();
+    _controllerDuration.clear();
+  }
+
   String? _Name;
   String? _Phone_number;
   String? _Category;
@@ -18,6 +49,7 @@ class _RequestformState extends State<Requestform> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        controller: _controllerName,
         decoration: InputDecoration(labelText: 'Name'),
         validator: (String? Value) {
           if (Value!.isEmpty) {
@@ -33,6 +65,7 @@ class _RequestformState extends State<Requestform> {
 
   Widget _buildPhone_number() {
     return TextFormField(
+      controller: _controllerNumber,
       decoration: InputDecoration(labelText: 'Phone number'),
       maxLength: 10,
       keyboardType: TextInputType.phone,
@@ -51,6 +84,7 @@ class _RequestformState extends State<Requestform> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
+        controller: _controllerCategory,
         decoration: InputDecoration(labelText: 'Category'),
         validator: (String? Value) {
           if (Value!.isEmpty) {
@@ -68,6 +102,7 @@ class _RequestformState extends State<Requestform> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        controller: _controllerItem,
         decoration: InputDecoration(labelText: 'Item'),
         validator: (String? Value) {
           if (Value!.isEmpty) {
@@ -85,6 +120,7 @@ class _RequestformState extends State<Requestform> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        controller: _controllerDuration,
         decoration: InputDecoration(labelText: 'Duration'),
         keyboardType: TextInputType.number,
         validator: (String? Value) {
@@ -131,17 +167,18 @@ class _RequestformState extends State<Requestform> {
                       width: width * 0.6,
                       child: ElevatedButton(
                         onPressed: () {
+                          _saveTask();
                           if (!_formkey.currentState!.validate()) {
                             return;
                           }
 
                           _formkey.currentState!.save();
 
-                          print(_Name);
-                          print(_Phone_number);
-                          print(_Category);
-                          print(_Item);
-                          print(_Duration);
+                          // print(_Name);
+                          // print(_Phone_number);
+                          // print(_Category);
+                          // print(_Item);
+                          // print(_Duration);
                         },
                         child: Text('Submit'),
                         style: ElevatedButton.styleFrom(
