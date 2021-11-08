@@ -104,6 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
                   child: TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
                     onSaved: (value) {
                       _email = value!;
                     },
@@ -133,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 3.0),
                   child: TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    cursorColor: Colors.white,
                     onSaved: (value) {
                       _password = value!;
                     },
