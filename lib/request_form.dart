@@ -13,22 +13,26 @@ class _RequestformState extends State<Requestform> {
   final _controllerItem = TextEditingController();
   final _controllerDuration = TextEditingController();
 
-  void _saveTask() {
-    final taskName = _controllerName.text;
-    final taskNumber = _controllerNumber.text;
-    final taskCategory = _controllerCategory.text;
-    final taskItem = _controllerItem.text;
-    final taskDuration = _controllerDuration.text;
+  void _saveTask() async {
+    if (_formkey.currentState!.validate()) {
+      final taskName = _controllerName.text;
+      final taskNumber = _controllerNumber.text;
+      final taskCategory = _controllerCategory.text;
+      final taskItem = _controllerItem.text;
+      final taskDuration = _controllerDuration.text;
 
-    FirebaseFirestore.instance.collection("Datum").add({"Name": taskName});
-    FirebaseFirestore.instance.collection("Datum").add({"PNumber": taskNumber});
-    FirebaseFirestore.instance
-        .collection("Datum")
-        .add({"Category": taskCategory});
-    FirebaseFirestore.instance.collection("Datum").add({"Item": taskItem});
-    FirebaseFirestore.instance
-        .collection("Datum")
-        .add({"Duration": taskDuration});
+      FirebaseFirestore.instance.collection("Datum").add({
+        "Name": taskName,
+        "PNumber": taskNumber,
+        "Category": taskCategory,
+        "Item": taskItem,
+        "Duration": taskDuration
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Fields can't be empty"),
+      ));
+    }
 
     _controllerName.clear();
     _controllerNumber.clear();
