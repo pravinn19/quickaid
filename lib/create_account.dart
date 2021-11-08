@@ -21,12 +21,12 @@ class Createaccount extends StatelessWidget {
             children: [
               Image.asset(
                 bgimage,
-                height: height * 0.30,
+                height: height * 0.40,
                 width: width,
                 fit: BoxFit.cover,
               ),
               Container(
-                height: height * 0.35,
+                height: height * 0.45,
                 width: width,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
