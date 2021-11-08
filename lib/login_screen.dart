@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:quickaid/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quickaid/new_account.dart';
 import 'constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -208,7 +209,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Newaccount()));
+                      },
                       child: Text("Create Account"),
                       style: TextButton.styleFrom(
                           primary: Colors.deepPurpleAccent),
