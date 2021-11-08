@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quickaid/request_form.dart';
 
 import 'constants.dart';
 
@@ -28,6 +29,8 @@ class Homescreen extends StatelessWidget {
               height: 0.1,
             ),
             ListTile(
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Requestform())),
               title: Text('Request an item'),
               leading: Icon(Icons.delivery_dining),
             ),
