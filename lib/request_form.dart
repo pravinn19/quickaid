@@ -26,7 +26,9 @@ class _RequestformState extends State<Requestform> {
         "PNumber": taskNumber,
         "Category": taskCategory,
         "Item": taskItem,
-        "Duration": taskDuration
+        "Duration": taskDuration,
+        "Server": FieldValue.serverTimestamp(),
+        "ID": FieldValue.increment(1)
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -164,7 +166,7 @@ class _RequestformState extends State<Requestform> {
                     _buildItem(),
                     _buildDuration(),
                     SizedBox(
-                      height: 100,
+                      height: 70,
                     ),
                     SizedBox(
                       height: height * 0.08,
