@@ -11,6 +11,8 @@ class Newaccount extends StatefulWidget {
 }
 
 class _NewaccountState extends State<Newaccount> {
+  // final _uname = TextEditingController();
+  String? _uname;
   final _auth = FirebaseAuth.instance;
   bool showProgress = false;
 
@@ -55,6 +57,31 @@ class _NewaccountState extends State<Newaccount> {
                     fontWeight: FontWeight.w800,
                     fontSize: 30.0,
                     color: Colors.deepPurpleAccent),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  // controller: _uname,
+                  style: TextStyle(color: Colors.white),
+                  keyboardType: TextInputType.emailAddress,
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    _uname = value; //get the value entered by user.
+                  },
+                  decoration: InputDecoration(
+                      labelText: "Enter your name",
+                      labelStyle: TextStyle(
+                          color: Colors.deepPurpleAccent, fontSize: 17),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.deepPurpleAccent)),
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(32.0)))),
+                ),
               ),
               SizedBox(
                 height: 20.0,
@@ -128,6 +155,8 @@ class _NewaccountState extends State<Newaccount> {
                         });
                       }
                     } catch (e) {}
+                    FirebaseAuth.instance.currentUser!
+                        .updateDisplayName(_uname);
                   },
                   minWidth: 200.0,
                   height: 50.0,
