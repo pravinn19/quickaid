@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import 'package:quickaid/home_screen.dart';
+import 'package:quickaid/forum_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quickaid/new_account.dart';
+import 'package:quickaid/welcome.dart';
 import 'constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final _controlleremail = TextEditingController();
+
   String? _email, _password;
 
   void signIn(BuildContext context) async {
@@ -21,8 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
         .then((authUser) {
       if (authUser.user != null)
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Homescreen()));
+            context, MaterialPageRoute(builder: (context) => Welcome()));
     });
+
+    final _taskemail = _controlleremail.text;
+
+    FirebaseFirestore.instance.collection("Datum").add({"Email": _taskemail});
   }
 
   @override
@@ -105,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding:
                       const EdgeInsets.only(left: 10.0, right: 10.0, top: 20.0),
                   child: TextFormField(
+                    controller: _controlleremail,
                     style: TextStyle(color: Colors.white),
                     cursorColor: Colors.white,
                     onSaved: (value) {
