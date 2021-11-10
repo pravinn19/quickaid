@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quickaid/create_account.dart';
-import 'package:quickaid/home_screen.dart';
+import 'package:quickaid/details.dart';
+import 'package:quickaid/forum_screen.dart';
+import 'package:quickaid/welcome.dart';
 import 'package:quickaid/request_form.dart';
+import 'package:quickaid/new_account.dart';
 import 'constants.dart';
 import 'login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +19,7 @@ class InitialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Requestform(),
+      home: LoginScreen(),
       title: appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
