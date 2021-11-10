@@ -30,17 +30,16 @@ class _RequestformState extends State<Requestform> {
         "Server": FieldValue.serverTimestamp(),
         "ID": FieldValue.increment(1)
       });
+      // _controllerName.clear();
+      // _controllerNumber.clear();
+      // _controllerCategory.clear();
+      // _controllerItem.clear();
+      // _controllerDuration.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Fields can't be empty"),
       ));
     }
-
-    _controllerName.clear();
-    _controllerNumber.clear();
-    _controllerCategory.clear();
-    _controllerItem.clear();
-    _controllerDuration.clear();
   }
 
   String? _Name;
@@ -91,7 +90,8 @@ class _RequestformState extends State<Requestform> {
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
         controller: _controllerCategory,
-        decoration: InputDecoration(labelText: 'Category'),
+        decoration: InputDecoration(
+            labelText: 'what category does the item belongs to?'),
         validator: (String? Value) {
           if (Value!.isEmpty) {
             return 'Category is Required';
@@ -109,7 +109,7 @@ class _RequestformState extends State<Requestform> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
         controller: _controllerItem,
-        decoration: InputDecoration(labelText: 'Item'),
+        decoration: InputDecoration(labelText: 'Name of the Item'),
         validator: (String? Value) {
           if (Value!.isEmpty) {
             return 'Item name is Required';
@@ -127,7 +127,7 @@ class _RequestformState extends State<Requestform> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
         controller: _controllerDuration,
-        decoration: InputDecoration(labelText: 'Duration'),
+        decoration: InputDecoration(labelText: 'Lending time (Min/ Hours)'),
         keyboardType: TextInputType.number,
         validator: (String? Value) {
           if (Value!.isEmpty) {
